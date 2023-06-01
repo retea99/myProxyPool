@@ -1,0 +1,1 @@
+This project just a crude proxy pool which need user to add proxies to a sqlite database artificially. To be honest, the project is not completed, there are some functions and features need to be finished.

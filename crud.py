@@ -23,6 +23,9 @@ def release_proxy(db:Session,clientIp:str):
 
 
 
+
+
+
 def get_proxy(db:Session,clientIp:str):
     release_proxy(db,clientIp=clientIp)
     proxy= db.query(Proxy).filter(Proxy.usable==True,Proxy.using==False).first()

@@ -3,8 +3,8 @@ import requests
 import time
 import schemas
 from requests import Response
-from models import Proxy
-from schemas import proxy
+from models import Proxy,User
+from schemas import proxy,user
 from datetime import datetime
 
 test_url="xxxxxxxx"
@@ -66,4 +66,15 @@ def convert(p:Proxy):
         "http": "http://%(ip)s:%(port)s" %{'ip':p.ip,'port':p.port},
         "https": "https://%(ip)s:%(port)s" %{'ip':p.ip,'port':p.port}
     }
+
+def adduser(db:Session, username:str,password:str=None):
+    '''用于将新用户存储进数据库，需要注意此处的password参数已经是hash过后的password'''
+    user = User(username = username, hashedpw = password)
+    db.add(user)
+    db.commit()
+
+def get_user_by_username(db:Session, username:str):
+    user = db.query(User).filter(User.username==username).first()
+    return user
+
 
